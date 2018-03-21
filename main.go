@@ -4,6 +4,15 @@ import (
 	"fmt"
 )
 
+//T 一个链表结构
+type T struct {
+	name string
+	next *T
+}
+
+//TT 是T的别名，Golang1.9支持的新语法
+type TT = T
+
 //返回函数中分配的内存
 func retMen() *[2]int {
 	a := [2]int{1, 2}
@@ -19,4 +28,13 @@ func main() {
 	(*a)[0] = 100
 	fmt.Printf("out p is: %p\n", a)
 	fmt.Println(*a)
+
+	//----------------------
+	tail := TT{"tail", nil}
+	head := TT{"head", &tail}
+
+	for ptr := &head; ptr != nil; ptr = ptr.next {
+		fmt.Println(ptr.name)
+	}
+
 }
