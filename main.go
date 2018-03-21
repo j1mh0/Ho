@@ -2,6 +2,11 @@ package main
 
 import (
 	"fmt"
+	//m指代的不是目录cal，而是cal目录下所有go文件唯一的package:etc
+	//一个目录下的go文件不能分属不同的package
+	"github.com/j1mh0/ho/etc"
+	m "github.com/j1mh0/ho/etc/cal"
+	// "runtime/pprof"
 )
 
 //T 一个链表结构
@@ -21,6 +26,13 @@ func retMen() *[2]int {
 }
 
 func main() {
+
+	// f, err := os.Create("cpu")
+	// if err == nil {
+	// 	pprof.StartCPUProfile(f)
+	// 	defer pprof.StopCPUProfile()
+	// }
+
 	fmt.Println("Hello,Wrold!")
 	//修改函数中返回的内存空间是否会报错
 	a := retMen()
@@ -36,5 +48,10 @@ func main() {
 	for ptr := &head; ptr != nil; ptr = ptr.next {
 		fmt.Println(ptr.name)
 	}
+
+	//实验包名和目录名不同。import的是目录，而使用的是包名
+	//一个目录下的go文件不能分属两个以上不同的package(子目录除外)
+	display.SayHello()
+	fmt.Println(m.Sum(1, 3))
 
 }
