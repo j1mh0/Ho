@@ -53,5 +53,7 @@ func main() {
 	//一个目录下的go文件不能分属两个以上不同的package(子目录除外)
 	display.SayHello()
 	fmt.Println(m.Sum(1, 3))
+	//计算100个素数的函数，函数定义在prime.go里。这里注释是因为atom编辑器无法加载同包的另一个文件，go install没有问题
+	//doPrime()
 
 }
