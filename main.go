@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
 	"sync"
 	//m指代的不是目录cal，而是cal目录下所有go文件唯一的package:etc
 	//一个目录下的go文件不能分属不同的package
@@ -71,12 +73,20 @@ func main() {
 	display.SayHello()
 	fmt.Println(m.Sum(1, 3))
 	//计算100个素数的函数，函数定义在prime.go里。这里注释是因为atom编辑器无法加载同包的另一个文件，go install没有问题
-	//doPrime()
+	doPrime()
 
 	//单例模式
 	n := getSingleton()
 	fmt.Printf("1st singleton return pointer is %p.\n", n)
 	p := getSingleton()
 	fmt.Printf("2nd singleton return pointer is %p.\n", p)
+
+	//捕捉Ctrl+C后退出
+	sig := make(chan os.Signal)
+	signal.Notify(sig, os.Interrupt, os.Kill)
+	select {
+	case <-sig:
+		fmt.Println("main program exit.")
+	}
 
 }
