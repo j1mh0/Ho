@@ -2,12 +2,29 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	//m指代的不是目录cal，而是cal目录下所有go文件唯一的package:etc
 	//一个目录下的go文件不能分属不同的package
 	"github.com/j1mh0/ho/etc"
 	m "github.com/j1mh0/ho/etc/cal"
 	// "runtime/pprof"
 )
+
+//单例模式
+type Singleton struct{}
+
+var s *Singleton
+var once sync.Once
+
+func getSingleton() *Singleton {
+	once.Do(func() {
+		if s == nil {
+			s = &Singleton{}
+			fmt.Println("Singleton Created.")
+		}
+	})
+	return s
+}
 
 //T 一个链表结构
 type T struct {
@@ -55,5 +72,11 @@ func main() {
 	fmt.Println(m.Sum(1, 3))
 	//计算100个素数的函数，函数定义在prime.go里。这里注释是因为atom编辑器无法加载同包的另一个文件，go install没有问题
 	//doPrime()
+
+	//单例模式
+	n := getSingleton()
+	fmt.Printf("1st singleton return pointer is %p.\n", n)
+	p := getSingleton()
+	fmt.Printf("2nd singleton return pointer is %p.\n", p)
 
 }
