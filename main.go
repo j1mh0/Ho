@@ -73,13 +73,25 @@ func main() {
 	display.SayHello()
 	fmt.Println(m.Sum(1, 3))
 	//计算100个素数的函数，函数定义在prime.go里。这里注释是因为atom编辑器无法加载同包的另一个文件，go install没有问题
-	doPrime()
+	//doPrime()
 
 	//单例模式
 	n := getSingleton()
 	fmt.Printf("1st singleton return pointer is %p.\n", n)
 	p := getSingleton()
 	fmt.Printf("2nd singleton return pointer is %p.\n", p)
+
+	//go 里的i变量很可能是无序的，因为没有值copy
+	for i := 0; i < 10; i++ {
+		go func() {
+			fmt.Printf("inner count:%v\n", i)
+		}()
+	}
+
+	//------------------------
+	sa := make([]int, 5)
+	sa = append(sa, 1, 2, 3)
+	fmt.Println(sa)
 
 	//捕捉Ctrl+C后退出
 	sig := make(chan os.Signal)
