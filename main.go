@@ -10,6 +10,7 @@ import (
 	"github.com/j1mh0/ho/etc"
 	m "github.com/j1mh0/ho/etc/cal"
 	// "runtime/pprof"
+	"flag"
 )
 
 //单例模式
@@ -45,6 +46,11 @@ func retMen() *[2]int {
 }
 
 func main() {
+
+	//测试输入参数的解析
+	config:=flag.String("config","./","app name")
+	flag.Parse()
+	fmt.Println(*config)
 
 	// f, err := os.Create("cpu")
 	// if err == nil {
