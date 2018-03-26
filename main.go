@@ -53,6 +53,7 @@ func main() {
 	flag.Parse()
 	fmt.Println(*config)
 	fmt.Println(*dir)
+	fmt.Println("Hello,Visual Studio Code.")
 
 	// f, err := os.Create("cpu")
 	// if err == nil {
