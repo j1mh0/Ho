@@ -13,7 +13,7 @@ import (
 	"flag"
 )
 
-//单例模式
+//Singleton 单例模式
 type Singleton struct{}
 
 var s *Singleton
@@ -48,9 +48,11 @@ func retMen() *[2]int {
 func main() {
 
 	//测试输入参数的解析
-	config:=flag.String("config","./","app name")
+	config := flag.String("config", "./", "app name")
+	dir := flag.String("dir", ".", "cureent dirctory")
 	flag.Parse()
 	fmt.Println(*config)
+	fmt.Println(*dir)
 
 	// f, err := os.Create("cpu")
 	// if err == nil {
