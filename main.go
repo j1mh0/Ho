@@ -114,6 +114,15 @@ func main() {
 	sa = append(sa, 1, 2, 3)
 	fmt.Println(sa)
 
+	tSig := make(chan int, 3)
+	tSig <- 1
+	tSig <- 2
+	tSig <- 3
+	for {
+		fmt.Println("Signal Start....")
+		fmt.Printf("signal is %v\n", <-tSig)
+	}
+
 	//捕捉Ctrl+C后退出
 	sig := make(chan os.Signal)
 	signal.Notify(sig, os.Interrupt, os.Kill)
