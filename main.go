@@ -114,13 +114,17 @@ func main() {
 	sa = append(sa, 1, 2, 3)
 	fmt.Println(sa)
 
-	tSig := make(chan int, 3)
+	//非阻塞带缓冲的Channel
+	tSig := make(chan int, 1)
 	tSig <- 1
-	tSig <- 2
-	tSig <- 3
-	for {
-		fmt.Println("Signal Start....")
-		fmt.Printf("signal is %v\n", <-tSig)
+	for i := 0; i < 100; i++ {
+		select {
+		case c := <-tSig:
+			fmt.Printf("signal is %v\n", c)
+		default: //有default子句就不会阻塞
+			fmt.Printf("loop #%v\n", i)
+		}
+
 	}
 
 	//捕捉Ctrl+C后退出
