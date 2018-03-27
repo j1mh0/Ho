@@ -35,6 +35,14 @@ type T struct {
 	next *T
 }
 
+//Int is int type
+type Int int
+
+//SayHi is type Int's function
+func (i *Int) SayHi() {
+	fmt.Println("say hi in Int")
+}
+
 //TT 是T的别名，Golang1.9支持的新语法
 type TT = T
 
@@ -96,6 +104,10 @@ func main() {
 			fmt.Printf("inner count:%v\n", i)
 		}()
 	}
+
+	//空指针的方法调用测试
+	var iInt *Int = nil
+	iInt.SayHi()
 
 	//------------------------
 	sa := make([]int, 5)
