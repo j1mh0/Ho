@@ -11,6 +11,7 @@ import (
 	m "github.com/j1mh0/ho/etc/cal"
 	// "runtime/pprof"
 	"flag"
+	// "time"
 )
 
 //Singleton 单例模式
@@ -54,6 +55,16 @@ func retMen() *[2]int {
 }
 
 func main() {
+
+	//定时器使用测试
+	// timer := time.NewTicker(1 * time.Second)
+
+	// for {
+	// 	select {
+	// 	case <-timer.C:
+	// 		fmt.Println(time.Now())
+	// 	}
+	// }
 
 	//测试输入参数的解析
 	config := flag.String("config", "./", "app name")
