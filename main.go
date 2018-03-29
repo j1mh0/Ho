@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"sync"
+	"time"
 	//m指代的不是目录cal，而是cal目录下所有go文件唯一的package:etc
 	//一个目录下的go文件不能分属不同的package
 	"github.com/j1mh0/ho/etc"
@@ -55,6 +56,21 @@ func retMen() *[2]int {
 }
 
 func main() {
+
+	//Channel可以用range
+	timeerSignal := make(chan int)
+
+	go func() {
+		for i := 0; i < 10; i++ {
+			timeerSignal <- i
+			time.Sleep(2 * time.Second)
+		}
+		close(timeerSignal)
+	}()
+
+	for i := range timeerSignal {
+		fmt.Printf("receive from timersignal is %v.\n", i)
+	}
 
 	//定时器使用测试
 	// timer := time.NewTicker(1 * time.Second)
